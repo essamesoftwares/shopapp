@@ -5,6 +5,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 //my own imports
 import 'package:shopapp/components/horizontal_listview.dart';
 import 'package:shopapp/components/products.dart';
+import 'package:shopapp/pages/cart.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -27,8 +28,8 @@ class _HomePageState extends State<HomePage> {
         boxFit: BoxFit.cover,
         images: [
           AssetImage('images/w3.jpg'),
-          AssetImage('images/m1.png'),
-          AssetImage('images/c1.jpeg'),
+          AssetImage('images/m1.jpg'),
+          AssetImage('images/c1.jpg'),
           AssetImage('images/w4.jpg'),
           AssetImage('images/m2.jpg'),
           AssetImage('images/w1.jpg'),
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
         animationDuration: Duration(milliseconds: 1000),
         dotSize: 4.0,
         indicatorBgPadding: 2.0,
+        dotBgColor: Colors.transparent,
       ),
     );
 
@@ -45,7 +47,7 @@ class _HomePageState extends State<HomePage> {
       appBar: new AppBar(
         elevation: 0.1,
         backgroundColor: Colors.red,
-        title: Text('Fashapp'),
+        title: Text('FashionKart'),
         actions: [
           new IconButton(
               icon: Icon(
@@ -58,7 +60,10 @@ class _HomePageState extends State<HomePage> {
                 Icons.shopping_cart,
                 color: Colors.white,
               ),
-              onPressed: () {})
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new Cart()));
+              })
         ],
       ),
       drawer: new Drawer(
@@ -84,35 +89,53 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('Home Page'),
-                leading: Icon(Icons.home),
+                leading: Icon(
+                  Icons.home,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text('My Account'),
-                leading: Icon(Icons.person),
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text('My Orders'),
-                leading: Icon(Icons.shopping_basket),
+                leading: Icon(
+                  Icons.shopping_basket,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new Cart()));
+              },
               child: ListTile(
-                title: Text('Categories'),
-                leading: Icon(Icons.dashboard),
+                title: Text('Shopping cart'),
+                leading: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text('Favourites'),
-                leading: Icon(Icons.favorite),
+                leading: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
               ),
             ),
             Divider(),
@@ -120,20 +143,14 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('Settings'),
-                leading: Icon(
-                  Icons.settings,
-                  color: Colors.blue,
-                ),
+                leading: Icon(Icons.settings),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text('About'),
-                leading: Icon(
-                  Icons.help,
-                  color: Colors.green,
-                ),
+                leading: Icon(Icons.help),
               ),
             ),
           ],
