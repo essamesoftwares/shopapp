@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "125406485659",
+    "firebase_url": "https://shop-app-194fc.firebaseio.com",
+    "project_id": "shop-app-194fc",
+    "storage_bucket": "shop-app-194fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125406485659:android:de6d5558dd2f4de2587a3e",
+        "android_client_info": {
+          "package_name": "com.essame.shopapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125406485659-1g3sqta7pbcb8hii3i4lqbjpuda053qu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg7TNYuSsXxB7n2vkU6HwkefBKdFUPtw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125406485659-1g3sqta7pbcb8hii3i4lqbjpuda053qu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
