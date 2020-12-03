@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:provider/provider.dart';
+import 'package:shopapp/commons/common.dart';
 
 //my own imports
 import 'package:shopapp/components/horizontal_listview.dart';
 import 'package:shopapp/components/products.dart';
 import 'package:shopapp/pages/cart.dart';
+import 'package:shopapp/provider/user_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,8 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     Widget image_carousel = new Container(
       height: 200,
       child: new Carousel(
@@ -27,35 +33,50 @@ class _HomePageState extends State<HomePage> {
           AssetImage('images/w1.jpg'),
         ],
         autoplay: true,
-        animationCurve: Curves.fastOutSlowIn,
-        animationDuration: Duration(milliseconds: 1000),
+        dotBgColor: Colors.transparent,
+        // animationCurve: Curves.fastOutSlowIn,
+        // animationDuration: Duration(milliseconds: 1000),
         dotSize: 4.0,
         indicatorBgPadding: 2.0,
-        dotBgColor: Colors.transparent,
       ),
     );
 
     return Scaffold(
       appBar: new AppBar(
+        iconTheme: IconThemeData(color: deepOrange),
         elevation: 0.1,
-        backgroundColor: Colors.red,
-        title: Text('FashionKart'),
+        backgroundColor: white,
+        title: Material(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.grey[50],
+          elevation: 0.0,
+          child: TextFormField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: "Search...",
+            ),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "The search field cannot be empty";
+              }
+              return null;
+            },
+          ),
+        ),
         actions: [
           new IconButton(
               icon: Icon(
                 Icons.search,
-                color: Colors.white,
+                color: deepOrange,
               ),
               onPressed: () {}),
           new IconButton(
               icon: Icon(
                 Icons.shopping_cart,
-                color: Colors.white,
+                color: deepOrange,
               ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new Cart()));
-              })
+              onPressed: () {})
         ],
       ),
       drawer: new Drawer(
@@ -74,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              decoration: new BoxDecoration(color: Colors.red),
+              decoration: new BoxDecoration(color: deepOrange),
             ),
             //body
             InkWell(
@@ -130,6 +151,18 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {
+                user.signOut();
+              },
+              child: ListTile(
+                title: Text('SignOut'),
+                leading: Icon(
+                  Icons.exit_to_app,
+                  color: Colors.red,
+                ),
+              ),
+            ),
             Divider(),
             InkWell(
               onTap: () {},
@@ -153,15 +186,23 @@ class _HomePageState extends State<HomePage> {
           //image carousel begins here
           image_carousel,
           //padding widget
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Categories'),
-          ),
-          //horizontal list view begins here
-          HorizontalList(),
-          new Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: new Text('Recent products'),
+          // new Padding(
+          //   padding: const EdgeInsets.all(4.0),
+          //   child: Container(
+          //       alignment: Alignment.centerLeft, child: new Text('Categories')),
+          // ),
+          // //horizontal list view begins here
+          // HorizontalList(),
+
+          Row(
+            children: <Widget>[
+              new Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: new Text('Recent products')),
+              ),
+            ],
           ),
           Flexible(child: Products()),
         ],
