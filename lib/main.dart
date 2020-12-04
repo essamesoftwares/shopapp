@@ -19,7 +19,7 @@ void main() {
 class ScreensController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of(context)<UserProvider>(context);
+    final user = Provider.of<UserProvider>(context);
     switch (user.status) {
       case Status.Uninitialized:
         return Splash();
